@@ -1,0 +1,194 @@
+package tm240_q1c;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.geom.*;
+import java.util.Random;
+
+/**
+ *
+ * @author eid.emary
+ */
+public class TM240_Q1c extends JApplet{
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        JFrame frame=new JFrame();
+        frame.setTitle("hello");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JApplet applete =new TM240_Q1c();
+        applete.init();
+        frame.getContentPane().add(applete);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    public void init(){
+        JPanel panel=new JApp1Panel();
+        getContentPane().add(panel);
+    }
+    
+}
+class JApp1Panel extends JPanel
+{
+    public JApp1Panel()
+    {
+        setPreferredSize(new Dimension(640,480));
+    }
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2=(Graphics2D) g;
+        Font f = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+        g2.setFont(f);
+        Stroke S = new BasicStroke(2);
+        g2.setStroke(S);
+        
+        g2.translate(200, 200);
+        g2.drawString("Shapes Combined", -90, 200);
+        
+        
+        g2.setColor(Color.blue);
+        QuadCurve2D q;
+        int n = 10;
+        double r_shape1 = 100;
+        double r_shape2 = 120;
+        double t_shape1 = 0;
+        double t_shape2 = Math.PI/ n;
+        int x1_shape1 = (int) (r_shape1 * Math.cos(t_shape1));
+        int y1_shape1 = (int) (r_shape1 * Math.sin(t_shape1));
+        int x1_shape2 = (int) (r_shape2 * Math.cos(t_shape2));
+        int y1_shape2 = (int) (r_shape2 * Math.sin(t_shape2));
+        
+        int x2_shape1, y2_shape1;
+        int x2_shape2, y2_shape2;
+        for(int i = 1; i<=n; i++)
+        {
+            t_shape1 = (double) i/n * Math.PI *2;
+            t_shape2 = Math.PI/n + (double) i/n * (Math.PI *2);
+            
+            x2_shape1 = (int) (r_shape1 * Math.cos(t_shape1));
+            y2_shape1 = (int) (r_shape1 * Math.sin(t_shape1));
+            x2_shape2 = (int) (r_shape2 * Math.cos(t_shape2));
+            y2_shape2 = (int) (r_shape2 * Math.sin(t_shape2));
+            
+            q = new QuadCurve2D.Double(x1_shape1, y1_shape1, x1_shape2, y1_shape2, x2_shape1, y2_shape1);
+            g2.draw(q);
+            g2.translate(0, 400);
+            g2.draw(q);
+            g2.translate(0, -400);
+            x1_shape1 = x2_shape1;
+            y1_shape1 = y2_shape1;
+            x1_shape2 = x2_shape2;
+            y1_shape2 = y2_shape2;
+        }
+        g2.drawString("Shape1, r1=100, r2=120", -100, 600);
+        
+        
+        g2.setColor(Color.red);
+        r_shape1 = 50;
+        r_shape2 = 150;
+        t_shape1 = 0;
+        t_shape2 = Math.PI/ n;
+        x1_shape1 = (int) (r_shape1 * Math.cos(t_shape1));
+        y1_shape1 = (int) (r_shape1 * Math.sin(t_shape1));
+        x1_shape2 = (int) (r_shape2 * Math.cos(t_shape2));
+        y1_shape2 = (int) (r_shape2 * Math.sin(t_shape2));
+        
+        for(int i = 1; i<=n; i++)
+        {
+            t_shape1 = (double) i/n * Math.PI *2;
+            t_shape2 = Math.PI/n + (double) i/n * (Math.PI *2);
+            
+            x2_shape1 = (int) (r_shape1 * Math.cos(t_shape1));
+            y2_shape1 = (int) (r_shape1 * Math.sin(t_shape1));
+            x2_shape2 = (int) (r_shape2 * Math.cos(t_shape2));
+            y2_shape2 = (int) (r_shape2 * Math.sin(t_shape2));
+            
+            q = new QuadCurve2D.Double(x1_shape1, y1_shape1, x1_shape2, y1_shape2, x2_shape1, y2_shape1);
+            g2.draw(q);
+            g2.translate(400, 400);
+            g2.draw(q);
+            g2.translate(-400, -400);
+            x1_shape1 = x2_shape1;
+            y1_shape1 = y2_shape1;
+            x1_shape2 = x2_shape2;
+            y1_shape2 = y2_shape2;
+        }
+        g2.drawString("Shape2, r1=50, r2=150", 300, 600);
+        
+        
+        g2.setColor(Color.green);
+        r_shape1 = 150;
+        r_shape2 = 50;
+        t_shape1 = 0;
+        t_shape2 = Math.PI/ n;
+        x1_shape1 = (int) (r_shape1 * Math.cos(t_shape1));
+        y1_shape1 = (int) (r_shape1 * Math.sin(t_shape1));
+        x1_shape2 = (int) (r_shape2 * Math.cos(t_shape2));
+        y1_shape2 = (int) (r_shape2 * Math.sin(t_shape2));
+        
+        for(int i = 1; i<=n; i++)
+        {
+            t_shape1 = (double) i/n * Math.PI *2;
+            t_shape2 = Math.PI/n + (double) i/n * (Math.PI *2);
+            
+            x2_shape1 = (int) (r_shape1 * Math.cos(t_shape1));
+            y2_shape1 = (int) (r_shape1 * Math.sin(t_shape1));
+            x2_shape2 = (int) (r_shape2 * Math.cos(t_shape2));
+            y2_shape2 = (int) (r_shape2 * Math.sin(t_shape2));
+            
+            q = new QuadCurve2D.Double(x1_shape1, y1_shape1, x1_shape2, y1_shape2, x2_shape1, y2_shape1);
+            g2.draw(q);
+            g2.translate(800, 400);
+            g2.draw(q);
+            g2.translate(-800, -400);
+            x1_shape1 = x2_shape1;
+            y1_shape1 = y2_shape1;
+            x1_shape2 = x2_shape2;
+            y1_shape2 = y2_shape2;
+        }
+        g2.drawString("Shape3, r1=150, r2=50", 700, 600);
+        
+        
+        g2.setColor(Color.magenta);
+        r_shape1 = 20;
+        r_shape2 = 300;
+        t_shape1 = 0;
+        t_shape2 = Math.PI/ n;
+        x1_shape1 = (int) (r_shape1 * Math.cos(t_shape1));
+        y1_shape1 = (int) (r_shape1 * Math.sin(t_shape1));
+        x1_shape2 = (int) (r_shape2 * Math.cos(t_shape2));
+        y1_shape2 = (int) (r_shape2 * Math.sin(t_shape2));
+        
+        for(int i = 1; i<=n; i++)
+        {
+            t_shape1 = (double) i/n * Math.PI *2;
+            t_shape2 = Math.PI/n + (double) i/n * (Math.PI *2);
+            
+            x2_shape1 = (int) (r_shape1 * Math.cos(t_shape1));
+            y2_shape1 = (int) (r_shape1 * Math.sin(t_shape1));
+            x2_shape2 = (int) (r_shape2 * Math.cos(t_shape2));
+            y2_shape2 = (int) (r_shape2 * Math.sin(t_shape2));
+            
+            q = new QuadCurve2D.Double(x1_shape1, y1_shape1, x1_shape2, y1_shape2, x2_shape1, y2_shape1);
+            g2.draw(q);
+            g2.translate(1200, 400);
+            g2.draw(q);
+            g2.translate(-1200, -400);
+            x1_shape1 = x2_shape1;
+            y1_shape1 = y2_shape1;
+            x1_shape2 = x2_shape2;
+            y1_shape2 = y2_shape2;
+        }
+        g2.drawString("Shape4, r1=20, r2=300", 1100, 600);
+        
+        
+    }
+
+}// end of JApp1Panel class
+
+
+
