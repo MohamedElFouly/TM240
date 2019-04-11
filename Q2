@@ -1,0 +1,111 @@
+package tm240_q2_new;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.awt.geom.*;
+import java.util.Random;
+
+/**
+ *
+ * @author eid.emary
+ */
+public class TM240_Q2_new extends JApplet{
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        JFrame frame=new JFrame();
+        frame.setTitle("hello");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JApplet applete =new TM240_Q2_new();
+        applete.init();
+        frame.getContentPane().add(applete);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    public void init(){
+        JPanel panel=new JApp1Panel();
+        getContentPane().add(panel);
+    }
+    
+}
+class JApp1Panel extends JPanel{
+public JApp1Panel(){
+    setPreferredSize(new Dimension(640,480));
+}
+public void paintComponent(Graphics g)
+{
+    super.paintComponent(g);
+    Graphics2D g2=(Graphics2D) g;
+    Shape s1, s2, s3, s4;
+    QuadCurve2D leaf1_a = new QuadCurve2D.Double(1000,900,1075, 800, 1000, 700);
+    //leaf1_a center = (1000,850)
+    
+    //g2.draw(leaf1_a);
+    
+    
+    AffineTransform at1 = new AffineTransform();
+    //translate leaf 1a to center
+    at1.setToTranslation(-1000, -850);
+    // reflect leaf 1a
+    at1.preConcatenate(new AffineTransform(-1,0,0,1,0,0));
+    //return reflection    
+    at1.preConcatenate(new AffineTransform(1,0,0,1,1000,850));
+    s1 =at1.createTransformedShape(leaf1_a);
+    //g2.draw(s1);
+    
+    //rotate leaf1_a
+    AffineTransform at2 = new AffineTransform();
+    
+    at2.setToRotation(Math.PI/4, 1000, 900);
+    s2 = at2.createTransformedShape(leaf1_a);
+    g2.draw(s2);
+    //rotate reflection of leaf1_a
+    s1 = at2.createTransformedShape(s1);
+    g2.draw(s1);
+    s4 = s1;
+    s3 = s2;
+    //s2 = s3;
+    
+    
+    //Reflect the whole leaf
+    
+    AffineTransform at3 = new AffineTransform();
+    //translate leaf 1 after rotation to center
+    at3.setToTranslation(-1000, -900);
+    // reflect leaf 1 after rotation
+    at3.preConcatenate(new AffineTransform(-1,0,0,1,0,0));
+    //return reflection    
+    at3.preConcatenate(new AffineTransform(1,0,0,1,1000,900));
+    s3 =at3.createTransformedShape(s3);
+    g2.draw(s3);
+    //do the same to get the whole 2 leaves
+    s4 =at3.createTransformedShape(s4);
+    g2.draw(s4);
+    
+    //scale down
+    double x = 0.85;
+    double y = 0.85;
+    for(int i = 0; i<=30; i++)
+    {
+    AffineTransform sd = new AffineTransform();
+    sd.scale(x, y);
+    sd.translate(176.5, 50);
+    s1 = sd.createTransformedShape(s1);
+    g2.draw(s1);
+    s2 = sd.createTransformedShape(s2);
+    g2.draw(s2);
+    s3 = sd.createTransformedShape(s3);
+    g2.draw(s3);
+    s4 = sd.createTransformedShape(s4);
+    g2.draw(s4);
+    }
+    
+    
+    
+    
+}
+
+}// end of JApp1Panel class
